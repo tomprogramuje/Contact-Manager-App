@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<button><a href="{% url 'contact_form' %}">Create New Contact</a></button>
+<form method="POST" action="{% url 'contact_search' %}">
+  {% csrf_token %}
+  <input type="search" placeholder="Search..." name="searched">
+  <button type="submit">Search</button>
+</form>
+  <br><br><h2>Contacts</h2>
+  <ul>
+    {% for contact in contact_list %}
+      <li><a href="{% url 'contact_detail' contact.id %}">{{ contact.lastname }}, {{ contact.firstname }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}
